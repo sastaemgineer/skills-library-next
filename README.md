@@ -15,22 +15,43 @@ Needs Node 18.17+. An internet connection is needed for Google Fonts.
 
 ## Add a skill
 
-Drop a `.md` file into `content/skills/`. That is the whole step: every `.md` file in the folder is picked up automatically at build time (see `app/page.js` and `lib/skills.js`). In `npm run dev` it appears after a refresh. For a deployed site, rebuild.
+Everything in `content/skills/` is picked up automatically at build time. There is no list to edit.
 
-- Sidebar title: `name:` in the file's frontmatter, else the file name.
-- Sidebar order ("Added order"): alphabetical by file name. Prefix with `01-`, `02-` to control it.
-- A section is each `#` / `##` block; that is what "Copy section" copies.
+```
+content/skills/
+  my-note.md                  single-file skill
+  my-skill/                   folder skill: needs a SKILL.md at its root
+    SKILL.md
+    references/overview.md    any depth, any number of files
+    scripts/run.py            text files (.py .sh .json .yaml ...) show in raw view
+```
 
-Visitors can also import or paste files in the browser. Those are stored in their own `localStorage` only and are not written into the project.
+- Sidebar title: `name:` in `SKILL.md` frontmatter, else the file or folder name.
+- Folder skills show as an expandable tree. `SKILL.md` comes first, the rest alphabetical.
+- `references/x.md` written in inline code or as a link opens that file in the app.
+- Binary files (images etc.) in a skill folder are not shown; the skill page says how many were skipped.
+- Every file has a URL: `#/skill-id/path/to/file.md`. Back/forward and shared links work.
+
+Visitors can also use **Import files** (.md, .zip), **Import folder**, or **Paste Markdown**. A folder or zip containing `SKILL.md` becomes one skill. These are stored in that browser's `localStorage` only (about 5 MB limit) and are not written into the project.
+
+## Copying
+
+| Action | Result |
+|---|---|
+| Copy file | the exact text of the open file |
+| Copy section | one `#` / `##` block |
+| Copy skill | every file of the skill in one Markdown document, each introduced by `<!-- FILE: path -->` |
+| Download .zip | the real folder structure; the only way to move a whole skill back out |
 
 ## Structure
 
 ```
 app/layout.js, page.js, globals.css   shell, server page that loads the files, styles
 components/Library.jsx                 the whole UI (client component)
-lib/skills.js                         build-time folder reader (server only)
+lib/skills.js                         build-time reader: files and skill folders (server only)
+lib/paths.js                          path helpers, reference-link resolution, folder/zip grouping
 lib/markdown.js                       parser, section splitter, search snippets, code/table HTML
-content/skills/*.md                   YOUR SKILLS
+content/skills/                       YOUR SKILLS (files or folders)
 next.config.mjs                       output: 'export' (static)
 ```
 
