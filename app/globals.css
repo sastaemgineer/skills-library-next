@@ -92,3 +92,18 @@ dialog textarea{height:220px;font:13px "JetBrains Mono",monospace;resize:vertica
 .sortrow{display:flex;align-items:center;gap:8px;margin:0 14px 8px;font-size:13px;color:var(--mute)}
 .sortrow select{flex:1;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surf)}
 .note{background:var(--surf);border:1px solid var(--acc);border-radius:6px;padding:10px 14px;margin-bottom:16px;font-size:14px}
+
+/* Folder skills: tree, breadcrumb, in-app reference links */
+.acts{flex-wrap:wrap}.acts .btn{flex:1 1 40%}
+.tree-head{display:flex;align-items:stretch}.tree-head .item{flex:1;min-width:0}
+.chev{border:0;background:none;width:28px;color:var(--mute);font-size:12px;padding:0}
+.tree{margin:0 0 6px 28px;border-left:1px solid var(--line)}
+.tree .item{padding:6px 12px;font-size:14px;border-left:0}
+.tree .item[aria-current="true"]{background:var(--surf);box-shadow:inset 3px 0 var(--acc)}
+.tree .item b{font-weight:500;font-family:"JetBrains Mono",monospace;font-size:13px}
+.treedir{padding:8px 12px 2px;color:var(--mute);font:12px "JetBrains Mono",monospace}
+.crumbs{font-size:13px;color:var(--mute);margin:0 0 8px}
+.crumbs button{border:0;background:none;padding:0;color:var(--acc);text-decoration:underline}
+.md .ref{cursor:pointer;color:var(--acc);text-decoration:underline dotted}
+.md code.ref{background:var(--code)}
+.skipnote{color:var(--mute);font-size:13px;margin:0 0 8px}
